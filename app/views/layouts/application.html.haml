@@ -23,7 +23,7 @@
             - else
               %a{href: cart_path(current_user&.cart&.id), class: "badge badge-success" }
                 Cart:
-                = current_user.cart.cart_items.length
+                = current_user&.cart&.cart_items&.length
               %li.nav-item
                 = current_user.email
               %li.nav-item
