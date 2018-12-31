@@ -2,7 +2,12 @@
 lock "~> 3.11.0"
 
 set :application, "pedaldrop"
-set :repo_url, "git@github.com:ckahle33/pedaldrop.git"
+set :repo_url, "https://github.com/ckahle33/pedaldrop.git"
+
+set :ssh_options, { forward_agent: true }
+
+set :passenger_restart_with_touch, true
+set :passenger_restart_command, 'touch tmp/restart.txt'
 
 set :deploy_to, "/home/pedaldrop"
 

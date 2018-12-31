@@ -19,7 +19,7 @@ gem "font-awesome-rails"
 gem 'webpacker'
 
 # money
-gem 'stripe', :git => 'https://github.com/stripe/stripe-ruby'
+gem 'stripe'
 # gem 'money'
 
 # misc
