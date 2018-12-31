@@ -1,0 +1,20 @@
+.container
+  .row
+    = render partial: "partials/sidebar"
+    .col-9
+      .row
+        .col-12
+          %h4
+            Users
+      - if @users
+        - @users.each do |u|
+          .row.user
+            .col-lg-2
+              .idea-letter{style: "border: 1px solid #{random_color}"}
+                = link_to u.email[0], user_path(u.id)
+            .col-lg-10
+              %h6.title
+                = link_to u.username, user_path(u.id)
+              %p
+                = u.ideas.count
+                Ideas

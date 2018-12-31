@@ -1,0 +1,28 @@
+%nav.navbar.navbar-light.navbar-expand-lg
+  .container
+    = link_to image_tag("logo.png"), '/', class: "navbar-brand"
+    .navbar-collapse
+      - if current_user
+        %ul.navbar-nav.ml-auto
+          %li.nav-item
+            = link_to "New Idea", new_idea_path, class: "nav-link"
+          %li.nav-item
+            = link_to "My Ideas", me_ideas_path, class: "nav-link"
+          %li.nav-item
+            = link_to "Upvoted", voted_ideas_path, class: "nav-link"
+          -# %li.nav-item
+          -#   = link_to "Messages", messages_path, class: "nav-link border-right"
+          %li.nav-item
+            = link_to "Users", users_path, class: "nav-link border-right"
+          %li.nav-item
+            = link_to current_user.email, edit_user_path(current_user.id), class: "nav-link"
+          %li.nav-item
+            = link_to "Log Out", logout_path, class: "nav-link"
+      - else
+        %ul.navbar-nav.ml-auto
+          %li.nav-item
+            = link_to "Sign Up", signup_path, class: "nav-link"
+          %li.nav-item
+            = link_to "Log In", login_path, class: "nav-link"
+          %li.nav-item
+            = link_to "Explore", explore_path, class: "nav-link"

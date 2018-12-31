@@ -1,0 +1,12 @@
+.col-6.mx-auto.centered-form
+  %p
+    If we find the email you enter, we will send you a reset email.🤘
+  = form_tag forgot_password_path do |p|
+    .form-group
+      %label{for: "email"}
+        Email
+      %input{type: "text", name: "email"}
+
+    .form-group
+      %input{type: 'submit', class: "btn btn-primary", value: "Reset"}
+

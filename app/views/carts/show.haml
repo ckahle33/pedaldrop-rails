@@ -1,0 +1,33 @@
+.row
+  .col-12
+    %h5
+      My Cart
+.row
+  .col-9
+    .item-list
+      - @cart.cart_items.each do |item|
+        .item.row
+          .col-2
+            %img.item-image{:src => "https://source.unsplash.com/100x100/?nature"}/
+          .col-8
+            .item-title
+              = item.product.name
+            .price
+              = item.product.price
+            .stats
+              = item.product.amount
+              available
+          .col-2
+            = form_for @cart, method: :patch do |c|
+              = hidden_field_tag(:product_id, item.product.id)
+              = c.submit "Remove", class: "btn btn-danger"
+  .col-3
+    .card
+      .card-body
+        %h5.card-title
+          = number_to_currency(@cart.total)
+        %h6.card-subtitle.mb-2.text-muted
+          Order total
+        %a{href: new_charge_path, class: "btn btn-primary"}
+          Checkout Now
+

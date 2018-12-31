@@ -1,0 +1,9 @@
+.col-3
+  .sidebar
+    %h4
+      Brands
+    %ul.sidebar
+      - Brand.all.each do |brand|
+        %li.sidebar-item
+          %img.brand-logo{:src => "https://source.unsplash.com/100x100/?music"}/
+          = brand.name

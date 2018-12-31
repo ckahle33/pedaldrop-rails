@@ -1,0 +1,19 @@
+.row
+  = render "partials/sidebar"
+  .col-9
+    .item-list
+      .item.row
+        .col-2
+          %img.item-image{:src => "https://source.unsplash.com/100x100/?nature"}/
+        .col-9
+          .item-title
+            = @product.name
+          .price
+            = @product.price
+          .stats
+            = @product.amount
+            available
+        .col-1
+          = form_for Cart.new, action: carts_path(@product.id), method: :post do |c|
+            = hidden_field_tag(:product_id, @product.id)
+            = c.submit "Add To Cart"

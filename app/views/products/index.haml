@@ -1,0 +1,20 @@
+.row
+  = render "partials/sidebar"
+  .col-9
+    %h5 Todays Deals
+    .item-list
+      - @products.each do |p|
+        .item.row
+          .col-2
+            %img.item-image{:src => "https://source.unsplash.com/100x100/?nature"}/
+          .col-8
+            .item-title
+              = link_to(p.name, product_path(p.id))
+            .price
+              = p.price
+            .stats
+              = p.amount
+          .col-2
+            = form_for Cart.new, action: carts_path, method: :post do |c|
+              = hidden_field_tag(:product_id, p.id)
+              = c.submit "Add To Cart", class: "btn btn-success"

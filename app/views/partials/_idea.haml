@@ -1,0 +1,32 @@
+.row.project
+  .col-lg-2
+    - if p.image.attachment
+      .idea-image{style: "background-image: url('#{url_for(p.image)}')"}
+    - else
+      .idea-image{style: "background-image: url(#{random_image})"}
+  .col-lg-8
+    %h6.title
+      = link_to p.title, idea_path(p.id)
+    .subtitle
+      .item.mr-2
+        = link_to p.user.username, user_path(p.user.id)
+      .item.mr-2
+        = time_ago_in_words(p.created_at)
+        ago
+      .item.mr-2
+        = p.comments.count
+        comments
+    .description
+      = truncate_html(p.description.html_safe, length: 200)
+  .col-lg-2
+    // break to a partial
+    - if current_user
+      %button.vote.pull-right{data: {vote: "", url: vote_idea_path(p.id), id: p.id, count: p.votes.count, toggled: "#{user_voted?(p.id)}"}}
+        = fa_icon "arrow-up"
+        %span.count
+          = p.votes.count
+    - else
+      %a.vote.pull-right{href: "/login"}
+        = fa_icon "arrow-up"
+        %span.count
+          = p.votes.count

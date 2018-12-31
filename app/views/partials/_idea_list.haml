@@ -1,0 +1,8 @@
+.col-9
+  .projects
+    .header
+      %h4
+        = @header
+    - if @ideas
+      - @ideas.each do |p|
+        = render partial: "partials/idea", locals: { p: p }

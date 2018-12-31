@@ -1,0 +1,15 @@
+.row
+  = render "partials/sidebar"
+  .col-9
+    .item-list
+      .item.row
+        .col-2
+          %img.item-image{:src => "https://source.unsplash.com/100x100/?nature"}/
+        .col-10
+          .item-title
+            = @item.name
+          .price
+            = @item.price
+          .stats
+            = @item.amount
+            available

@@ -1,0 +1,37 @@
+!!!
+%html
+  %head
+    %title Pedaldrop
+    = csrf_meta_tags
+    = csp_meta_tag
+    = javascript_pack_tag 'application'
+
+    %link{href: "https://fonts.googleapis.com/css?family=Fredoka+One|Lato", rel: "stylesheet"}
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
+
+  %header.header
+    %nav.navbar.navbar-light.navbar-expand-lg
+      .container
+        %a.navbar-brand{:href => "/"} Pedaldrop
+        .navbar-collapse
+          %ul.navbar-nav.ml-auto
+            - unless current_user
+              %li.nav-item
+                = link_to("Sign In", login_path)
+              %li.nav-item
+                = link_to("Sign Up", signup_path)
+            - else
+              %a{href: cart_path(current_user.cart.id), class: "badge badge-success" }
+                Cart:
+                = current_user.cart.cart_items.length
+              %li.nav-item
+                = current_user.email
+              %li.nav-item
+                = link_to("Sign Out", logout_path)
+
+  %body
+    - flash.each do |key, value|
+      %div{:class => "alert alert-#{key}"}= value
+    %main
+      .container
+        = yield
