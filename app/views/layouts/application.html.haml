@@ -21,7 +21,7 @@
               %li.nav-item
                 = link_to("Sign Up", signup_path)
             - else
-              %a{href: cart_path(current_user&.carti&.id), class: "badge badge-success" }
+              %a{href: cart_path(current_user&.cart&.id), class: "badge badge-success" }
                 Cart:
                 = current_user.cart.cart_items.length
               %li.nav-item
