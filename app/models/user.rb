@@ -9,6 +9,8 @@ class User < ApplicationRecord
   before_create :generate_reset_token
   before_create :downcase_email
 
+  validates_uniqueness_of :email
+
   def generate_confirm_token
     self.confirmation_token = SecureRandom.uuid
   end
