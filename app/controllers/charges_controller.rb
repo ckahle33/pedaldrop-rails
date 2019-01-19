@@ -11,12 +11,15 @@ class ChargesController < ApplicationController
       :source  => params[:stripeToken]
     )
 
-    charge = Stripe::Charge.create(
-      :customer    => customer.id,
-      :amount      => @amount,
-      :description => 'Rails Stripe customer',
-      :currency    => 'usd'
-    )
+    current_user.update(stripe_customer_id: customer.id)
+
+    # Write a background job that charges each users card at a later step
+    # charge = Stripe::Charge.create(
+    #   :customer    => customer.id,
+    #   :amount      => @amount,
+    #   :description => 'Rails Stripe customer',
+    #   :currency    => 'usd'
+    # )
 
   rescue Stripe::CardError => e
     flash[:error] = e.message
