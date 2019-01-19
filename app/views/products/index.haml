@@ -1,20 +1,24 @@
 .row
   -# = render "partials/sidebar"
   .col-12
-    %h5 Current Deals
-    .item-list
+    %h4.my-4 Current Deals
+    .card-columns
       - @products.each do |p|
-        .row.item
-          .col-2
-            %img.item-image{:src => "https://source.unsplash.com/100x100/?nature"}/
-          .col-8
-            .item-title
+        .card
+          .image-wrap
+            =image_tag(["tc-flashback", "strymon", "earthquaker", "vox"].sample, class: "item-image card-image-top")
+          .card-body
+            %h5.card-title
               = link_to(p.name, product_path(p.id))
-            .price
+            %p.card-text
+              = p.description
+            %h6.card-text.price
+              $
               = p.price
-            .stats
+            %p.card-text
               = p.amount
-          .col-2
-            = form_for Cart.new, action: carts_path, method: :post do |c|
-              = hidden_field_tag(:product_id, p.id)
-              = c.submit "Join Drop", class: "btn btn-success"
+              left to complete this drop
+            %p.card-text
+              = form_for Cart.new, action: carts_path, method: :post do |c|
+                = hidden_field_tag(:product_id, p.id)
+                = c.submit "Join Drop", class: "btn btn-success"

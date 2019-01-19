@@ -34,5 +34,9 @@
     - flash.each do |key, value|
       %div{:class => "alert alert-#{key}"}= value
     %main
+      .banner-wrap
+        .banner{style: "background-image: url(#{image_url('pedal-bg')});"}
+        %h5.banner-text
+          Great deals on handpicked pedals for a limted time
       .container
         = yield
