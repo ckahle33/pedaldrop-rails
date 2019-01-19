@@ -82,8 +82,8 @@ ActiveRecord::Schema.define(version: 2019_01_19_000420) do
     t.string "reset_token"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.boolean "seller"
     t.string "stripe_customer_id"
+    t.boolean "seller"
   end
 
   add_foreign_key "cart_items", "carts"
