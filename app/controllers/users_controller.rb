@@ -27,6 +27,9 @@ class UsersController < ApplicationController
       redirect_to login_path
       flash[:info] = "An account already exists with this email. Please login"
     elsif !@user && @new_user.save
+      if user_params[:seller]
+        redirect_to new_dealer_path and return
+      end
       @new_user.send_confirmation_email
       redirect_to login_path
       flash[:info] = "Click the link sent in the confirmation email to login."
@@ -95,6 +98,6 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:name, :email, :password, :password_confirmation, :developer, :years_experience, :website_url, :github_url, :username)
+    params.require(:user).permit(:name, :email, :password, :password_confirmation, :seller, :username)
   end
 end

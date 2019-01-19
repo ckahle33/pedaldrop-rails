@@ -2,9 +2,9 @@
   .form-group
     %label
       Email or Username
-    = p.text_field :email
+    = p.text_field :email, class: "form-control"
   .form-group
     = p.label :password
-    = p.password_field :password
+    = p.password_field :password, class: "form-control"
   .form-group
-    = p.submit("Login")
+    = p.submit "Log In", class: "btn btn-primary"

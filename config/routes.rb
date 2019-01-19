@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   get '/reset/:token',           to: 'users#reset', as: 'reset'
   patch '/reset_password/:token', to: 'users#reset_password', as: 'reset_password'
   resources :users
+  resources :dealers
 
   mount Sidekiq::Web => "/sidekiq"
 end

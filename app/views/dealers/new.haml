@@ -1,0 +1,26 @@
+.row
+  .col-6.mx-auto.centered-form
+
+    %h3
+      Create  Dealer
+    .alert.alert-warning
+      This form is an application to sell on our platform. If confirmed you will be sent an email.
+
+    = form_for @dealer, url: {action: "create"} do |p|
+      .form-group
+        = p.label :address
+        = p.text_field :address, required: true, class: "form-control"
+      .form-group
+        = p.label :address2
+        = p.text_field :address2, required: true, class: "form-control"
+      .form-group
+        = p.label :city
+        = p.text_field :city, required: true, class: "form-control"
+      .form-group
+        = p.label :state
+        = p.password_field :state, required: true, class: "form-control"
+      .form-group
+        = p.label "Description"
+        = p.check_box :description, class: "form-control"
+      .form-group
+        = p.submit "Create Dealer", class: "btn btn-primary"
