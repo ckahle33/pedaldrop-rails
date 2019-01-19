@@ -10,14 +10,8 @@
     name: "#{Faker::Music.album} #{%w(fuzz delay distortion).sample}",
     item_type: "Pedal",
     price:   [100, 200, 300].sample,
-    amount: [20, 50, 100].sample
-  )
-  Brand.find_or_create_by(
-    name: Faker::Music.band,
-    city: Faker::Address.city,
-    state: Faker::Address.state,
-    country: Faker::Address.country,
-    description: Faker::Lorem.paragraph
+    amount: [20, 50, 100].sample,
+    description: Faker::BojackHorseman.tongue_twister
   )
   puts "Creating User, Product and Brand for #{t}"
 end
