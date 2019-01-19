@@ -1,7 +1,7 @@
 .row
-  = render "partials/sidebar"
-  .col-9
-    %h5 Todays Deals
+  -# = render "partials/sidebar"
+  .col-12
+    %h5 Current Deals
     .item-list
       - @products.each do |p|
         .item.row
@@ -17,4 +17,4 @@
           .col-2
             = form_for Cart.new, action: carts_path, method: :post do |c|
               = hidden_field_tag(:product_id, p.id)
-              = c.submit "Add To Cart", class: "btn btn-success"
+              = c.submit "Join Drop", class: "btn btn-success"

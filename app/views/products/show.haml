@@ -1,6 +1,6 @@
 .row
-  = render "partials/sidebar"
-  .col-9
+  -# = render "partials/sidebar"
+  .col-12
     .item-list
       .item.row
         .col-2
@@ -16,4 +16,4 @@
         .col-1
           = form_for Cart.new, action: carts_path(@product.id), method: :post do |c|
             = hidden_field_tag(:product_id, @product.id)
-            = c.submit "Add To Cart"
+            = c.submit "Join Drop"
