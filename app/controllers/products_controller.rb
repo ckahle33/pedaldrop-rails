@@ -3,6 +3,7 @@ class ProductsController < ApplicationController
   def index
     @header = "All Ideas"
     @products = Product.all.order("created_at DESC")
+    Rails.logger.info @products.inspect
     render 'index'
   end
 
