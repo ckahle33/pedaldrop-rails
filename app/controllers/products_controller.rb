@@ -3,7 +3,9 @@ class ProductsController < ApplicationController
   def index
     @header = "All Ideas"
     @products = Product.all
-    Rails.logger.info @products.inspect
+    if current_user
+      @cart = Cart.new(user_id: current_user.id)
+    end
     render 'index'
   end
 

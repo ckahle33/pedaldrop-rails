@@ -1,10 +1,11 @@
 .row
   .col-12
-    %h2
-      Thanks!!!!
-    %h5
+    %h2.my-4
+      Thanks!
+    %h5.alert.alert-warning
       You have not been charged yet, but if this drop hits the max number of purches needed, you will be charged
-      = current_user.cart.total
+      $
+      = current_user.paid_cart.total
 
     %h5
       We really appreciate you using Pedaldrop!

@@ -1,33 +1,44 @@
 .row
   .col-12
-    %h5
+    %h4.my-4
       My Cart
 .row
-  .col-9
-    .item-list
-      - @cart.cart_items.each do |item|
-        .item.row
-          .col-2
-            %img.item-image{:src => "https://source.unsplash.com/100x100/?nature"}/
-          .col-8
-            .item-title
-              = item.product.name
-            .price
-              = item.product.price
-            .stats
-              = item.product.amount
-              available
-          .col-2
-            = form_for @cart, method: :patch do |c|
-              = hidden_field_tag(:product_id, item.product.id)
-              = c.submit "Remove", class: "btn btn-danger"
-  .col-3
-    .card
-      .card-body
-        %h5.card-title
-          = number_to_currency(@cart.total)
-        %h6.card-subtitle.mb-2.text-muted
-          Order total
-        %a{href: new_charge_path, class: "btn btn-primary"}
-          Checkout Now
+  - if @cart
+    .col-9
+      .item-list
+        - @cart.cart_items.each do |item|
+          .item.row.my-4
+            .col-2
+              =image_tag(["tc-flashback", "strymon", "earthquaker", "vox"].sample, class: "item-image card-image-top")
+            .col-8
+              .item-title
+                = item.product.name
+              .price
+                = item.product.price
+              .stats
+                = item.product.amount
+                available
+            .col-2
+              = form_tag cart_path, method: :delete do |c|
+                = hidden_field_tag(:product_id, item.product.id)
+                = submit_tag "Remove", class: "btn btn-danger"
+    .col-3
+      .card
+        .card-body
+          %h5.card-title
+            = number_to_currency(@cart.total)
+          %h6.card-subtitle.mb-2.text-muted
+            Order total
+          = form_tag charges_path do
+            %article
+              - if flash[:error].present?
+                #error_explanation
+                  %p= flash[:error]
+              %label.amount
+                %span Amount:
+                = number_to_currency(@cart.total)
+            %script.stripe-button{"data-amount" => "#{@cart.total_cents}", "data-description" => "A month's subscription", "data-key" => ENV['PUBLISHABLE_KEY'], "data-locale" => "auto", :src => "https://checkout.stripe.com/checkout.js"}
+  - else
+    No cart items
+
 

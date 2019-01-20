@@ -3,7 +3,7 @@
     .item.row.my-4
       .col-2
         =image_tag(["tc-flashback", "strymon", "earthquaker", "vox"].sample, class: "item-image card-image-top")
-      .col-9
+      .col-8
         %h5.item-title
           = @product.name
         %h6.price
@@ -14,7 +14,10 @@
           left to complete this drop
         %p
           = @product.description
-      .col-1
-        = form_for Cart.new, action: carts_path(@product.id), method: :post do |c|
-          = hidden_field_tag(:product_id, @product.id)
-          = c.submit "Join Drop", class: "btn btn-success"
+      .col-2
+        - if current_user
+          = form_tag @cart, action: cart_path, method: :post do |c|
+            = hidden_field_tag(:product_id, @product.id)
+            = c.submit "Join Drop", class: "btn btn-success"
+        - else
+          = link_to "Join Drop", login_path, class: "btn btn-success join-drop"

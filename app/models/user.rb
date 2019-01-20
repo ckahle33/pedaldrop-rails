@@ -2,7 +2,7 @@ class User < ApplicationRecord
   include Rails.application.routes.url_helpers
 
   has_secure_password
-  has_one :cart
+  has_many :carts
   has_many :orders
 
   before_create :generate_confirm_token
@@ -37,6 +37,14 @@ class User < ApplicationRecord
 
   def downcase_email
     self.email = email.downcase
+  end
+
+  def current_cart
+    carts.current.last
+  end
+
+  def paid_cart
+    carts.paid.last
   end
 
 end

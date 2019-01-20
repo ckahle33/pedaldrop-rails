@@ -1,5 +1,7 @@
 class Cart < ApplicationRecord
   has_many :cart_items
+  scope :current, -> { where(paid: false) }
+  scope :paid, -> { where(paid: true) }
 
   def total
     cart_items.map {|c| c.product.price}.sum

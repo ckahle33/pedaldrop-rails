@@ -4,7 +4,7 @@ class ChargesController < ApplicationController
 
   def create
     # Amount in cents
-    @amount = (current_user.cart.total * 100)
+    @amount = (current_user.current_cart.total * 100)
 
     customer = Stripe::Customer.create(
       :email => params[:stripeEmail],
@@ -12,6 +12,16 @@ class ChargesController < ApplicationController
     )
 
     current_user.update(stripe_customer_id: customer.id)
+
+    current_user.current_cart.cart_items.map do |item|
+      p = item.product
+      p.update(amount: p.amount - 1)
+    end
+
+    current_user.orders.create(cart_id: current_user.current_cart.id)
+    current_user.current_cart.update(paid: true)
+
+    redirect_to thanks_path
 
     # Write a background job that charges each users card at a later step
     # charge = Stripe::Charge.create(
@@ -24,5 +34,8 @@ class ChargesController < ApplicationController
   rescue Stripe::CardError => e
     flash[:error] = e.message
     redirect_to new_charge_path
+  end
+
+  def thanks
   end
 end

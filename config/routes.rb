@@ -3,8 +3,14 @@ require 'sidekiq/web'
 Rails.application.routes.draw do
   root to: "products#index"
   resources :products
-  resources :carts, except: [:index, :new]
-  resources :charges
+  get '/cart', to: 'carts#show'
+  post '/cart', to: 'carts#update'
+  delete '/cart', to: 'carts#destroy'
+
+  # resources :carts, except: [:index, :new, :show]
+  # resources :charges
+  post 'charges', to: "charges#create"
+  get 'thanks', to: "charges#thanks"
 
   # auth
   get '/login',                  to: 'sessions#new'
