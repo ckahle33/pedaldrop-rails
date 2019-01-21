@@ -5,10 +5,10 @@ class SessionsController < ApplicationController
 
   def create
     @user = User.where(email: session_params[:email].downcase).first
-    if @user && !@user.confirmed_at
-      redirect_to login_path
-      flash[:info] = "Please confirm your account before logging in."
-    elsif @user && @user.authenticate(session_params[:password])
+    # if @user && !@user.confirmed_at
+    #   redirect_to login_path
+    #   flash[:info] = "Please confirm your account before logging in."
+    if @user && @user.authenticate(session_params[:password])
       session[:user_id] = @user.id
       redirect_to root_path
       flash[:info] = "Logged In."
